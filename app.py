@@ -5,14 +5,14 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # dev mode
-ENV = 'dev'
+ENV = 'prod'
 
 if ENV == 'dev':
   app.debug = True
   app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:mark1609@localhost:5000/yourtube'
 else:
   app.debug = False
-  app.config['SQLALCHEMY_DATABASE_URI'] = ''
+  app.config['SQLALCHEMY_DATABASE_URI'] = 'DATABASE_URL'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
