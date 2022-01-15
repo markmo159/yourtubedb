@@ -5,14 +5,14 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # dev mode
-ENV = 'proda'
+ENV = 'dev'
 
 if ENV == 'dev':
   app.debug = True
   app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:mark1609@localhost:5000/yourtube'
 else:
   app.debug = False
-  app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://qzbzipcxntigdy:46f36334485512e47d816f11de79eaa2c89e70b7d24cde1de35629bd73b4ce7b@ec2-63-32-12-208.eu-west-1.compute.amazonaws.com:5432/d3jjldnit5uj8f'
+  app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://qzbzipcxntigdy:46f36334485512e47d816f11de79eaa2c89e70b7d24cde1de35629bd73b4ce7b@ec2-63-32-12-208.eu-west-1.compute.amazonaws.com:5432/d3jjldnit5uj8f'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
