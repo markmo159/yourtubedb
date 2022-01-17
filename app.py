@@ -27,23 +27,31 @@ class Users(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(100), unique=True)
   password = db.Column(db.String(100))
+  name = db.Column(db.String(100))
 
-  def __init__(self,username,password):
+  def __init__(self,username,password,name):
       self.username = username
       self.password = password
+      self.name = name
 
 
 @app.route('/sign', methods=['POST'])
 def signIn():
+
   username = request.json['username']
   password = request.json['password']
+  name = request.json['name']
 
-  new_user = Users(username, password)
+  isExisting = Users.query.filter_by(username=username).first()
 
-  db.session.add(new_user)
-  db.session.commit()
+  if(isExisting):
+    return 'user existing'
+  else:
+    new_user = Users(username, password, name)
+    db.session.add(new_user)
+    db.session.commit()
+    return 'new user'
 
-  return 'new user'
 
 
 
@@ -57,6 +65,7 @@ def login():
     currUser['id'] = user.id
     currUser['username'] = user.username
     currUser['password'] = user.password
+    currUser['name'] = user.name
     output.append(currUser)
   return jsonify(output)
 
